@@ -25,8 +25,9 @@ visualise.graph(ast)
 pyURL = "https://example.com/helloworld.py"
 ast = generate.fromURL(pyURL)
 visualise.graph(ast)
-
 ```
+
+or, from the command line, python -m visast helloworld.py
 
 ## Like what you see?  Buy me a snack
 
