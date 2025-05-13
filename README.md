@@ -4,6 +4,10 @@ VisAST - Visualise Abstract Syntax Trees for Python.
 
 VisAST generates ASTs for a given Python script and builds visualisations of them.
 
+Here is an example of what it looks like:
+
+![ast](example.webp "Example 1")
+
 ## Install
 
 Install from PyPI [Here!](https://pypi.org/project/VisAST/)
