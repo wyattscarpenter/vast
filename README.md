@@ -51,6 +51,14 @@ And to zoom in on that:
 
 ![ast](Figure_2.png "Example 3")
 
+If you use plotter="pyvis" as an argument for visualise.graph:
+
+![ast](Figure_3.png "Example 4")
+
+which also makes html that may or may not successfully embed here:
+
+![ast](example_pyvis-based_ast_visualization.html "Example 5")
+
 ## Contributing
 
 Please make sure the tests pass, by running `python -m unittest` (or by running `tests/test_visast.py`) and making sure you get an `OK` at the end.

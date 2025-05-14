@@ -120,6 +120,6 @@ def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str], plott
                 print(node)
                 node["color"] = __colourNodes({node["label"] : "dummystr"})[0]
                 node["label"] = labels[node["label"]]
-            nt.show("nx.html", notebook=False)
+            nt.show("example_pyvis-based_ast_visualization.html", notebook=False)
         else:
             assert_never(plotter)
