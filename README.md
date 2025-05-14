@@ -51,3 +51,6 @@ And to zoom in on that:
 
 ![ast](Figure_2.png "Example 3")
 
+## Contributing
+
+Please make sure the tests pass, by running `python -m unittest` and making sure you get an `OK` at the end.
