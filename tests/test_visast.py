@@ -58,10 +58,6 @@ if __name__ == "__main__":
             unlink(tmp.name)
         self.assertIsInstance(aST, ast.AST, "generate.fromPath should generate an AST")
 
-if __name__ == "__main__":
-    unittest.main()
-
-
 class ASTCompare:
     """ Class for comparing ASTs.
     Copy of Jonathan Biemond's answer to https://stackoverflow.com/questions/76352198/how-to-compare-two-python-asts-ignoring-arguments
@@ -88,3 +84,6 @@ class ASTCompare:
             return all(self.compare_ast(n1, n2, ignore_args) for n1, n2 in zip_longest(node1, node2))
         else:
             return node1 == node2
+
+if __name__ == "__main__":
+    unittest.main()
