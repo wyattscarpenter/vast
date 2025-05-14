@@ -1,7 +1,15 @@
 import unittest
 import ast
-from os import unlink
+import os
 from typing import Union
+import sys
+
+if __name__ in ("__main__", "test_visast"):
+    # Hack to allow us to import visast from the parent dir if this script is invoked directly.
+    # Or, invoked by python -m unittest from within the tests/ folder
+    p = os.path.dirname(os.path.abspath(__file__)) + '/..'
+    sys.path.insert(1, p)
+
 from visast import generate
 
 class TestVisAST(unittest.TestCase):
@@ -54,7 +62,7 @@ if __name__ == "__main__":
             tmp.close()
 
             aST = generate.fromPath(tmp.name)
-            unlink(tmp.name)
+            os.unlink(tmp.name)
         self.assertIsInstance(aST, ast.AST, "generate.fromPath should generate an AST")
 
     def compare_ast(self, node1: Union[ast.AST, ast.expr, list[ast.expr]], node2: Union[ast.AST, ast.expr, list[ast.expr]], ignore_args: bool =False) -> bool:
