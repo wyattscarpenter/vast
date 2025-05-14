@@ -55,4 +55,4 @@ And to zoom in on that:
 
 Please make sure the tests pass, by running `python -m unittest` (or by running `tests/test_visast.py`) and making sure you get an `OK` at the end.
 
-Additionally, the project should typecheck under `pyright` and `mypy --install-types --non-interactive && mypy --follow-untyped-imports .`.
+Additionally, the project should typecheck under `pyright` and `dmypy run . -- --follow-untyped-imports`. (Do **not** use `--install-types` until https://github.com/python/typeshed/pull/14057 is merged, or you will get spurious type errors from types-networkx.)

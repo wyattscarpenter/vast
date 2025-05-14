@@ -20,16 +20,16 @@ def graph(a: ast.Module, really_show: bool = True) -> None:
     """
     GRAPH = nx.DiGraph()
     rootNodeID = "noRoot"
-    edges = []
+    edges: list[list[str]] = []
     labelDictionary = {}
-
     # Walk the tree, breadth-first, noting all edges.
     for node in ast.walk(a):
         nodeID = str(node.__class__) + str(id(node))  # Unique name
+        # ...Is this actually unique, or is the id reused? hash() would also be a candidate if so.
         nodeLabel = str(node.__class__).split("ast.")[1].split("'>")[0]
-        if nodeLabel == "Constant":
+        if isinstance(node, ast.Constant):
             nodeLabel += " " + str(node.value)
-        elif nodeLabel == "FunctionDef":
+        elif isinstance(node, ast.FunctionDef):
             nodeLabel += " " + str(node.name)
         labelDictionary[nodeID] = nodeLabel
 
@@ -47,15 +47,13 @@ def graph(a: ast.Module, really_show: bool = True) -> None:
             if labelDictionary.get(childNodeID) is None:
                 childLabel = str(child.__class__
                                  ).split("t.")[1].split("'>")[0]
-                if childLabel == "Constant":
+                if isinstance(child, ast.Constant):
                     childLabel += " " + str(child.value)
 
                 labelDictionary[childNodeID] = childLabel
-                if (childLabel == "Load"
-                   or childLabel == "Store"
-                   or childLabel == "Del"):
+                if isinstance(node, ast.Load|ast.Store|ast.Del):
                     if hasattr(node, "id"):
-                        nodeLabel = str(node.id)
+                        nodeLabel = str(node.id) #pyright: ignore[reportAttributeAccessIssue] #I believe the problem is, as of 2025-05-14, that the typeshed stubs for ast.expr_context is incomplete. Mypy narrows based on hasattr, so our explicit check avoids that problem, but pyright doesn't, see https://github.com/microsoft/pyright/issues/6717, so we would need to have another way of detecting if id is available, such as with richer type annotations.
                         labelDictionary[nodeID] = nodeLabel
 
             GRAPH.add_edge(nodeID, childNodeID)
@@ -100,7 +98,7 @@ def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str], reall
     # Make the graph look like a tree using hierarchy_pos.
     pos = EoN.hierarchy_pos(graph, rootNodeID)
     colourMap = __colourNodes(labels)
-    nx.draw_networkx_nodes(graph, pos=pos, alpha=0.6, node_color=colourMap)
+    nx.draw_networkx_nodes(graph, pos=pos, alpha=0.6, node_color=colourMap) #pyright: ignore[reportArgumentType] # This is a result of (maybe: pyright's parameter type inference for unannotated arguments with defaults, and) the fact that https://github.com/python/typeshed/pull/14057 isn't merged yet.
     nx.draw_networkx_edges(graph, pos=pos, alpha=0.5)
     nx.draw_networkx_labels(graph, pos=pos, labels=labels)
 

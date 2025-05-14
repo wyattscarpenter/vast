@@ -8,7 +8,7 @@ import ast
 import urllib.request
 
 
-def fromURL(uRL: str) -> ast.AST:
+def fromURL(uRL: str) -> ast.Module:
     """ This method, given a python file's URL, generates an abstract
     syntax tree for it.
 
@@ -49,7 +49,7 @@ def fromPath(path: str) -> ast.Module:
         raise ValueError("Cannot make an AST from an empty file.")
 
 
-def fromString(codeString: str) -> ast.AST:
+def fromString(codeString: str) -> ast.Module:
     """ This method, given a string of Python, generates an abstract
     syntax tree for it.
 
