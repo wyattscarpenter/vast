@@ -37,7 +37,7 @@ If you want to see more of what I do, you can visit [my blog](https://jamesphill
 
 If you want to donate to my development work by buying me a snack, I use [PayPal.Me](https://paypal.me/JamesPhillipsUK "My PayPal.Me").
 
-# Gallery
+## Gallery
 
 Here's what it looks like:
 
