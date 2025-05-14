@@ -3,3 +3,5 @@ vast.code-workspace
 *.pyc
 *.egg-info
 dist/*
+.dmypy.json
+lib/
