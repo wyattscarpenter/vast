@@ -53,4 +53,7 @@ And to zoom in on that:
 
 ## Contributing
 
-Please make sure the tests pass, by running `python -m unittest` and making sure you get an `OK` at the end.
+Please make sure the tests pass, by running `python -m unittest` (or by running `tests/test_visast.py`) and making sure you get an `OK` at the end.
+
+Additionally, the project should typecheck under `pyright` and `mypy --install-types --non-interactive && mypy --follow-untyped-imports .`
+
