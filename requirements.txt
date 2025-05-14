@@ -1,3 +1,4 @@
 EoN>=1.2
 matplotlib==3.10.3
 networkx==2.6.3
+pyvis

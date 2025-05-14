@@ -65,9 +65,13 @@ if __name__ == "__main__":
             os.unlink(tmp.name)
         self.assertIsInstance(aST, ast.AST, "generate.fromPath should generate an AST")
 
-    def testVisualizationOne(self) -> None:
+    def testVisualizationPyvis(self) -> None:
         aST = generate.fromString(self.aSTScript)
-        visualise.graph(aST, really_show=True) # could change this to False if it gets annoying
+        visualise.graph(aST, really_show=True, plotter="pyvis") # could change this to False if it gets annoying
+
+    def testVisualizationMatplotlib(self) -> None:
+        aST = generate.fromString(self.aSTScript)
+        visualise.graph(aST, really_show=True) # can change this to False if it gets annoying, or True to check with more certainty
 
     def compare_ast(self, node1: Union[ast.AST, ast.expr, list[ast.expr]], node2: Union[ast.AST, ast.expr, list[ast.expr]], ignore_args: bool =False) -> bool:
         """
