@@ -63,10 +63,10 @@ def graph(a: ast.Module) -> None:
     __plotGraph(GRAPH, rootNodeID, labelDictionary)
 
 
-def __colourNodes(labels: dict) -> list:
+def __colourNodes(labels: dict[str, str]) -> list[str]:
     """ Private.  Colours important nodes in an AST.
-    For python 3.9 support, this uses an if statement.  It would be more
-    efficient in 3.10+ to use a match/case block.
+    For python 3.9 support, this uses an if statement.  It would be better
+    in 3.10+ to use a match/case block.
 
     Args:
         labels(dict(str)): the labels for the AST.  Search these for features.
@@ -88,7 +88,7 @@ def __colourNodes(labels: dict) -> list:
     return colourMap
 
 
-def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict) -> None:
+def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str]) -> None:
     """ Private.  Plots a given networkx DiGraph as an AST.
 
     Args:
