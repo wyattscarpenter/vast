@@ -7,7 +7,6 @@ Authors: Jesse Phillips <james@jamesphillipsuk.com>
 """
 
 import ast
-import sys
 import networkx as nx
 import EoN
 import matplotlib.pyplot as plt
