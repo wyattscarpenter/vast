@@ -31,7 +31,7 @@ def fromURL(uRL: str) -> ast.AST:
     raise ValueError("Cannot generate AST from URL if none is provided.")
 
 
-def fromPath(path: str) -> ast.AST:
+def fromPath(path: str) -> ast.Module:
     """ This method, given a python file's path, generates an abstract
     syntax tree for it.
 
@@ -44,8 +44,7 @@ def fromPath(path: str) -> ast.AST:
     with open(path) as file:
         fileString = file.read()
     if fileString:
-        aST = ast.parse(fileString)
-        return aST
+        return ast.parse(fileString)
     else:
         raise ValueError("Cannot make an AST from an empty file.")
 

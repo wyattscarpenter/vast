@@ -12,11 +12,11 @@ import EoN
 import matplotlib.pyplot as plt
 
 
-def graph(aST: ast) -> None:
+def graph(a: ast.Module) -> None:
     """ Builds a visualisation of the provided AST.
 
     Args:
-        aST (AST): The abstract syntax tree.
+        a (AST): The abstract syntax tree.
     """
     GRAPH = nx.DiGraph()
     rootNodeID = "noRoot"
@@ -24,7 +24,7 @@ def graph(aST: ast) -> None:
     labelDictionary = {}
 
     # Walk the tree, breadth-first, noting all edges.
-    for node in ast.walk(aST):
+    for node in ast.walk(a):
         nodeID = str(node.__class__) + str(id(node))  # Unique name
         nodeLabel = str(node.__class__).split("ast.")[1].split("'>")[0]
         if nodeLabel == "Constant":

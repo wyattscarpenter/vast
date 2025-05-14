@@ -26,27 +26,27 @@ if __name__ == "__main__":
     main()
 '''
 
-    def testGenerateFromURLOne(self):
+    def testGenerateFromURLOne(self) -> None:
         remoteAST = generate.fromURL(self.aSTURL)
         self.assertIsInstance(remoteAST, ast.AST, "generate.fromURL should generate an AST")
 
-    def testGenerateFromStringOne(self):
+    def testGenerateFromStringOne(self) -> None:
         aST = generate.fromString(self.aSTScript)
         self.assertIsInstance(aST, ast.AST, "generate.fromString should generate an AST")
 
-    def testGenerateFromURLTwo(self):
+    def testGenerateFromURLTwo(self) -> None:
         aST = ast.parse(self.aSTScript)
         remoteAST = generate.fromURL(self.aSTURL)
         c = ASTCompare()
         self.assertTrue(c.compare_ast(aST, remoteAST), "AST from URL should be correct")
 
-    def testGenerateFromStringTwo(self):
+    def testGenerateFromStringTwo(self) -> None:
         defaultAST = ast.parse(self.aSTScript)
         generatedAST = generate.fromString(self.aSTScript)
         c = ASTCompare()
         self.assertTrue(c.compare_ast(defaultAST, generatedAST), "AST from string should be correct")
 
-    def testGenerateFrompathOne(self):
+    def testGenerateFrompathOne(self) -> None:
         import tempfile
         import urllib.request
         with tempfile.NamedTemporaryFile(delete=False) as tmp:
@@ -68,7 +68,7 @@ class ASTCompare:
     """
     from typing import Union
 
-    def compare_ast(self, node1: Union[ast.expr, list[ast.expr]], node2: Union[ast.expr, list[ast.expr]], ignore_args=False) -> bool:
+    def compare_ast(self, node1: Union[ast.AST, ast.expr, list[ast.expr]], node2: Union[ast.AST, ast.expr, list[ast.expr]], ignore_args: bool =False) -> bool:
         """Compare two AST nodes for equality."""
         from itertools import zip_longest
         if type(node1) is not type(node2):
