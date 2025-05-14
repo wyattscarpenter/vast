@@ -1,5 +1,6 @@
 import unittest
 import ast
+from os import unlink
 from visast import generate
 
 class TestVisAST(unittest.TestCase):
@@ -48,12 +49,13 @@ if __name__ == "__main__":
     def testGenerateFrompathOne(self):
         import tempfile
         import urllib.request
-        with tempfile.NamedTemporaryFile() as tmp:
-            with open(tmp.name, 'w') as fp:
-                remote = urllib.request.urlopen(self.aSTURL).read().decode()
-                fp.write(remote)
+        with tempfile.NamedTemporaryFile(delete=False) as tmp:
+            remote = urllib.request.urlopen(self.aSTURL).read()
+            tmp.write(remote)
+            tmp.close()
 
             aST = generate.fromPath(tmp.name)
+            unlink(tmp.name)
         self.assertIsInstance(aST, ast.AST, "generate.fromPath should generate an AST")
 
 if __name__ == "__main__":
