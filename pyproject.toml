@@ -1,3 +1,9 @@
+[project]
+# We only set these in here to make various build tools, like uv and poetry, happy:
+name = 'visast'
+version = '1.1.1' #be warned that this is in setup.cfg as well, so you must keep those in sync
+dynamic = ["dependencies", "authors", "urls", "readme", "description", "requires-python", "classifiers"]
+
 [build-system]
 requires = [
     "setuptools >= 43.0.0",
