@@ -113,15 +113,13 @@ def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str], plott
         if plotter == "matplotlib":
             plt.show()  # Tada!
         elif plotter == "pyvis":
-            nt = Network(directed=True)#, heading="Abstract Syntax Tree") #if the heading is set, it's doubled. Very odd.
+            nt = Network(directed=True, layout=True)#, heading="Abstract Syntax Tree") #if the heading is set, it's doubled. Very odd.
             nt.from_nx(graph)
             #Oddly these properties don't seem to come along for the ride:
             for node in nt.nodes:
                 print(node)
-                node["x"], node["y"]= pos[node["label"]] #setting these here doesn't seem to do anything. Might need to put them in the constructor...?
                 node["color"] = __colourNodes({node["label"] : "dummystr"})[0]
                 node["label"] = labels[node["label"]]
-            nt.set_options('{"hierarchical": true}')
             nt.show("nx.html", notebook=False)
         else:
             assert_never(plotter)
