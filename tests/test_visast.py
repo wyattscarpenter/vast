@@ -10,7 +10,7 @@ if __name__ in ("__main__", "test_visast"):
     p = os.path.dirname(os.path.abspath(__file__)) + '/..'
     sys.path.insert(1, p)
 
-from visast import generate
+from visast import generate, visualise
 
 class TestVisAST(unittest.TestCase):
     aSTURL = "https://gist.githubusercontent.com/JamesPhillipsUK/f3498b07d94a5a4e4ea4d3060c0af907/raw/a8eca1ef2d096bb652b3a1009d3bcb0f09f31af5/helloworld.py"
@@ -64,6 +64,10 @@ if __name__ == "__main__":
             aST = generate.fromPath(tmp.name)
             os.unlink(tmp.name)
         self.assertIsInstance(aST, ast.AST, "generate.fromPath should generate an AST")
+
+    def testVisualizationOne(self) -> None:
+        aST = generate.fromString(self.aSTScript)
+        visualise.graph(aST, really_show=True) # could change this to False if it gets annoying
 
     def compare_ast(self, node1: Union[ast.AST, ast.expr, list[ast.expr]], node2: Union[ast.AST, ast.expr, list[ast.expr]], ignore_args: bool =False) -> bool:
         """

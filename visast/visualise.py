@@ -12,7 +12,7 @@ import EoN
 import matplotlib.pyplot as plt
 
 
-def graph(a: ast.Module) -> None:
+def graph(a: ast.Module, really_show: bool = True) -> None:
     """ Builds a visualisation of the provided AST.
 
     Args:
@@ -60,7 +60,7 @@ def graph(a: ast.Module) -> None:
 
             GRAPH.add_edge(nodeID, childNodeID)
             edges.append([nodeID, childNodeID])
-    __plotGraph(GRAPH, rootNodeID, labelDictionary)
+    __plotGraph(GRAPH, rootNodeID, labelDictionary, really_show)
 
 
 def __colourNodes(labels: dict[str, str]) -> list[str]:
@@ -88,13 +88,14 @@ def __colourNodes(labels: dict[str, str]) -> list[str]:
     return colourMap
 
 
-def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str]) -> None:
+def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str], really_show: bool = True) -> None:
     """ Private.  Plots a given networkx DiGraph as an AST.
 
     Args:
         graph (nx.DiGraph): the graph to plot.
         rootNodeID (string): the root node of the graph represented as a tree.
         labels (dict(string)): the labels for the nodes in the graph.
+        really_show (bool): this can be set to False to disable actually displaying the plot, for testing purposes
     """
     # Make the graph look like a tree using hierarchy_pos.
     pos = EoN.hierarchy_pos(graph, rootNodeID)
@@ -106,4 +107,5 @@ def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str]) -> No
     plt.title("Abstract Syntax Tree:")
     plt.tight_layout(pad=0)
     plt.axis("off")
-    plt.show()  # Tada!
+    if really_show:
+        plt.show()  # Tada!
