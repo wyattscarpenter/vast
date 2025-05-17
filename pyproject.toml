@@ -1,8 +1,17 @@
-[project]
-# We only set these in here to make various build tools, like uv and poetry, happy:
+[project] # We only set these project table values to make various build tools, like uv and poetry, happy:
 name = 'visast'
-version = '1.1.1' #be warned that this is in setup.cfg as well, so you must keep those in sync
+#be warned that these are in setup.cfg as well, so you must keep those in sync:
+version = '1.1.1'
+#requires-python = ">= 3.9" #some day we might drop support for Python 3.9, and get to use match/case statements!
+# luckily, for the rest of them, we can "cheat" a little:
 dynamic = ["dependencies", "authors", "urls", "readme", "description", "requires-python", "classifiers"]
+
+[dependency-groups]
+dev = [
+  "pyright>=1.1.400",
+  "mypy>=1.15.0",
+  "types-networkx>=3.4.2.20250514", #note that this will require python >=3.10, although the non-dev version still works on 3.9.
+]
 
 [build-system]
 requires = [
