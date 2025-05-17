@@ -100,7 +100,6 @@ def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str], plott
     """
     # Make the graph look like a tree using hierarchy_pos.
     pos = EoN.hierarchy_pos(graph, rootNodeID)
-    print(pos)
     colourMap = __colourNodes(labels)
     nx.draw_networkx_nodes(graph, pos=pos, alpha=0.6, node_color=colourMap) #pyright: ignore[reportArgumentType] # This is a result of (maybe: pyright's parameter type inference for unannotated arguments with defaults, and) the fact that https://github.com/python/typeshed/pull/14057 isn't merged yet.
     nx.draw_networkx_edges(graph, pos=pos, alpha=0.5)
@@ -117,7 +116,6 @@ def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str], plott
             nt.from_nx(graph)
             #Oddly these properties don't seem to come along for the ride:
             for node in nt.nodes:
-                print(node)
                 node["color"] = __colourNodes({node["label"] : "dummystr"})[0]
                 node["label"] = labels[node["label"]]
             nt.show("example_pyvis-based_ast_visualization.html", notebook=False)
