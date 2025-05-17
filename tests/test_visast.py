@@ -95,7 +95,7 @@ if __name__ == "__main__":
         elif isinstance(node1, list) and isinstance(node2, list):
             return all(self.compare_ast(n1, n2, ignore_args) for n1, n2 in zip_longest(node1, node2))
         else:
-            return node1 == node2
+            return node1 == node2 #type: ignore[comparison-overlap] #Not sure about this one...
 
 if __name__ == "__main__":
     unittest.main()

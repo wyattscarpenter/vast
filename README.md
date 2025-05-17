@@ -61,8 +61,4 @@ which also makes html that may or may not successfully embed here:
 
 ## Contributing
 
-Please make sure the tests pass, by running `python -m unittest` (or by running `tests/test_visast.py`) and making sure you get an `OK` at the end.
-
-Additionally, the project should typecheck under `pyright` and `dmypy run . -- --follow-untyped-imports`. (Do **not** use `--install-types` until https://github.com/python/typeshed/pull/14057 is merged, or you will get spurious type errors from types-networkx.)
-
-This all can be checked by running check.bat, which should would on all operating systems.
+Please make sure the tests pass and typecheckers pass, by running `check.bat`, a script which should work on all operating systems. (You may have to, eg,  `poetry run` it, so that the right dependencies are installed.)

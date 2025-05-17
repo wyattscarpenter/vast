@@ -5,3 +5,4 @@ vast.code-workspace
 dist/*
 .dmypy.json
 lib/
+tmp_pyvis-based_ast_visualization.html

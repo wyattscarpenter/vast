@@ -7,12 +7,11 @@ Authors: Jesse Phillips <james@jamesphillipsuk.com>
 """
 
 import ast
-from typing import Literal, assert_never
+from typing import Literal, TypeVar, assert_never
 import networkx as nx
-import EoN
+import EoN #type: ignore[import-untyped]
 import matplotlib.pyplot as plt
-from networkx import network_simplex
-from pyvis.network import Network
+from pyvis.network import Network #type: ignore[import-untyped]
 
 
 def graph(a: ast.Module, plotter: Literal["matplotlib", "pyvis"] = "matplotlib", really_show: bool = True) -> None:
@@ -21,7 +20,7 @@ def graph(a: ast.Module, plotter: Literal["matplotlib", "pyvis"] = "matplotlib",
     Args:
         a (AST): The abstract syntax tree.
     """
-    g = nx.DiGraph()
+    g: nx.DiGraph[str] = nx.DiGraph()
     rootNodeID = "noRoot"
     edges: list[list[str]] = []
     labelDictionary = {}
@@ -88,8 +87,8 @@ def __colourNodes(labels: dict[str, str]) -> list[str]:
             colourMap.append("#1f78b4")
     return colourMap
 
-
-def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str], plotter: Literal["matplotlib", "pyvis"] = "matplotlib", really_show: bool = True) -> None:
+T = TypeVar('T') # if we didn't support Python <3.12, we could use type parameter syntax instead. Also, this TypeVar is a bit of an embellishment, because we only ever use this for a DiGraph[str], anyway.
+def __plotGraph(graph: "nx.DiGraph[T]", rootNodeID: str, labels: dict[str,str], plotter: Literal["matplotlib", "pyvis"] = "matplotlib", really_show: bool = True) -> None:
     """ Private.  Plots a given networkx DiGraph as an AST.
 
     Args:
@@ -118,6 +117,6 @@ def __plotGraph(graph: nx.DiGraph, rootNodeID: str, labels: dict[str,str], plott
             for node in nt.nodes:
                 node["color"] = __colourNodes({node["label"] : "dummystr"})[0]
                 node["label"] = labels[node["label"]]
-            nt.show("example_pyvis-based_ast_visualization.html", notebook=False)
+            nt.show("tmp_pyvis-based_ast_visualization.html", notebook=False)
         else:
             assert_never(plotter)

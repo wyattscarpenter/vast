@@ -1,1 +1,1 @@
-python -m unittest && pyright && dmypy run . -- --follow-untyped-imports
+python -m unittest && pyright && dmypy run . -- --strict
